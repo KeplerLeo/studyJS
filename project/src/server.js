@@ -1,4 +1,4 @@
-const porta = 3003
+const port = 3003
 
 const express = require('express')
 const app = express()
@@ -8,35 +8,35 @@ const db = require('./database')
 app.use(bodyParser.urlencoded({ extended: true }))
 
 app.get('/produtos', (req, res, next) => {
-    res.send(db.getProdutos())
+    res.send(db.getProducts())
 })
 
 app.get('/produtos/:id', (req, res, next) => {
-    res.send(db.getProduto(req.params.id))
+    res.send(db.getProduct(req.params.id))
 })
 
 app.post('/produtos', (req, res, next) => {
-    const produto = db.saveProduto({
-        nome: req.body.nome,
-        preco: req.body.preco
+    const product = db.saveProduct({
+        nome: req.body.name,
+        preco: req.body.price
     })
-    res.send(produto) // JSON
+    res.send(product) // JSON
 })
 
 app.put('/produtos/:id', (req, res, next) => {
-    const produto = db.saveProduto({
+    const product = db.saveProduct({
         id: req.params.id,
-        nome: req.body.nome,
-        preco: req.body.preco
+        nome: req.body.name,
+        preco: req.body.price
     })
-    res.send(produto) // JSON
+    res.send(product)
 })
 
 app.delete('/produtos/:id', (req, res, next) => {
-    const produto = db.deleteProduto(req.params.id)
-    res.send(produto) // JSON
+    const product = db.deleteProduct(req.params.id)
+    res.send(product) 
 })
 
-app.listen(porta, () => {
-    console.log(`Servidor está executando na porta ${porta}.`)
+app.listen(port, () => {
+    console.log(`Servidor está executando na porta ${port}.`)
 })
